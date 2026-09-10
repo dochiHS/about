@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>강혜성 — 인간 드릴</title>
+<meta name="description" content="막힌 곳이 있으면 뚫릴 때까지 파고드는 사람, 강혜성의 소개 페이지.">
+<style>
+  :root{
+    --bg:#faf7f2;
+    --ink:#23201c;
+    --ink-soft:#5c554c;
+    --line:#e2dbd0;
+    --card:#fffdfa;
+    --accent:#9a5b2e;
+    --accent-soft:#f0e4d6;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#17150f;
+      --ink:#ece7df;
+      --ink-soft:#a89f93;
+      --line:#332e26;
+      --card:#1e1b15;
+      --accent:#d9a273;
+      --accent-soft:#2b241b;
+    }
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    padding:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard","Malgun Gothic","Noto Sans KR",sans-serif;
+    font-size:17px;
+    line-height:1.75;
+    word-break:keep-all;
+  }
+  .wrap{max-width:720px;margin:0 auto;padding:0 20px}
+  header{padding-block:88px 56px}
+  .hi{font-size:14px;letter-spacing:.14em;color:var(--accent);margin:0 0 18px;text-transform:uppercase}
+  h1{
+    font-size:clamp(30px,6.5vw,44px);
+    line-height:1.35;
+    margin:0 0 22px;
+    font-weight:700;
+    letter-spacing:-.02em;
+  }
+  h1 em{font-style:normal;background:linear-gradient(transparent 62%,var(--accent-soft) 62%);padding:0 2px}
+  .sub{color:var(--ink-soft);margin:0;font-size:16px}
+  section{padding-block:38px;border-top:1px solid var(--line)}
+  h2{
+    font-size:14px;
+    letter-spacing:.12em;
+    color:var(--accent);
+    margin:0 0 20px;
+    font-weight:600;
+  }
+  h3{font-size:18px;margin:0 0 8px;font-weight:700}
+  p{margin:0 0 16px}
+  p:last-child{margin-bottom:0}
+  .lead{font-size:19px}
+  ul{margin:0 0 16px;padding-left:1.1em}
+  li{margin-bottom:8px}
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:22px 24px;
+    margin-bottom:16px;
+  }
+  .card:last-child{margin-bottom:0}
+  .when{
+    display:inline-block;
+    font-size:13px;
+    font-weight:700;
+    color:var(--accent);
+    background:var(--accent-soft);
+    border-radius:999px;
+    padding:2px 11px;
+    margin-bottom:10px;
+  }
+  .scene{color:var(--ink-soft);font-size:16px;margin-top:10px}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media (max-width:600px){.two{grid-template-columns:1fr}}
+  blockquote{
+    margin:0 0 20px;
+    padding:0 0 0 18px;
+    border-left:3px solid var(--accent-soft);
+    color:var(--ink-soft);
+  }
+  blockquote p{margin-bottom:8px;color:var(--ink)}
+  blockquote cite{font-style:normal;font-size:14px;color:var(--ink-soft)}
+  footer{
+    padding-block:34px 72px;
+    border-top:1px solid var(--line);
+    color:var(--ink-soft);
+    font-size:14px;
+  }
+  footer p{margin-bottom:8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <p class="hi">강혜성 · 대전</p>
+    <h1>저는 <em>인간 드릴</em>입니다.<br>막힌 곳이 있으면<br>뚫릴 때까지 파고듭니다.</h1>
+    <p class="sub">안정적인 자리에서 나와, 네트워크·보안 쪽으로 방향을 튼 서른한 살입니다. 이 페이지는 제가 어디에서 와서 어디로 가는 중인지 보여주려고 만들었습니다.</p>
+  </header>
+
+  <section>
+    <h2>어디에서 와서, 어디로</h2>
+    <p class="lead">누가 와도 저를 대체할 수 있는 부품 같은 역할을 오래 했습니다. 일은 문제없이 굴러갔지만, 마음 한쪽에서는 계속 성장하고 싶다는 생각이 들었습니다.</p>
+    <p>그러던 중 K뉴딜 AI 프로젝트가 눈에 들어왔습니다. 다니던 직장을 그만두는 게 겁이 안 났다면 거짓말이지만, 부모님과 여자친구가 저를 믿어줬습니다. 그 믿음을 등에 업고 나왔습니다.</p>
+    <p>지금은 ALEPH 과정을 들으며 네트워크·보안 직군으로 가는 길을 닦는 중입니다. 넉 달 안에 네트워크관리사 2급을 따는 것이 눈앞의 목표고, 그 너머로는 클라우드 보안 쪽을 보고 있습니다.</p>
+  </section>
+
+  <section>
+    <h2>넉 달 동안 만들 것</h2>
+    <div class="card">
+      <span class="when">1개월</span>
+      <h3>기초와 뼈대</h3>
+      <p>ALEPH 수업과 병행해 네트워크관리사 2급 필기 범위를 시작하고, 팀 프로젝트의 뼈대를 구상합니다.</p>
+    </div>
+    <div class="card">
+      <span class="when">2개월</span>
+      <h3>접수하고, 시작하고</h3>
+      <p>필기 시험을 접수해 응시합니다. 흩어져 있던 프로젝트 구상을 하나의 틀로 묶어 실제로 굴리기 시작합니다.</p>
+    </div>
+    <div class="card">
+      <span class="when">3개월</span>
+      <h3>실기와 손에 잡히는 결과</h3>
+      <p>실기 범위를 학습하고 응시합니다. 프로젝트는 각자 포지션에 맞는 자료를 모아 직접 입력하고 실행해봅니다.</p>
+    </div>
+    <div class="card">
+      <span class="when">4개월</span>
+      <h3>남는 것</h3>
+      <p>자격증 취득을 마치고 이력서에 반영해 지원을 시작합니다. 팀 프로젝트는 피드백을 받아 완성본으로 남깁니다.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>제가 잘 켜지는 자리</h2>
+
+    <div class="card">
+      <h3>도전정신 — 일이 몰릴 때</h3>
+      <p>시간이 촉박할수록 잘 돌아갑니다. 반대로 여유로우면 오히려 덜 발휘됩니다.</p>
+      <p class="scene">보안 업무를 할 때 아침저녁으로 방문객 권한 등록과 퇴사 처리 요청이 동시에 몰리곤 했습니다. 퇴사 예정자에게는 필요한 자료를 미리 메모장에 적어두게 하고, 방문객은 신규 등록자와 명함 처리가 끝난 등록자로 나눠 순차 처리하며 두 업무를 다 놓치지 않았습니다.</p>
+    </div>
+
+    <div class="card">
+      <h3>학구열 — 처음 보는 걸 배울 때</h3>
+      <p>아직 모르는 부분을 파고들 때 가장 즐겁습니다.</p>
+      <p class="scene">현장에서 배우는 게 빨라 매뉴얼을 잘 안 읽는 분위기였지만, 저는 매뉴얼을 읽으며 현장에서 배운 것과 비교해보는 게 재밌었습니다. 아직 안 배운 내용은 지금까지 익힌 걸로 먼저 유추해보고 답을 확인했고, 이해가 안 가는 자리마다 '왜?'를 붙여 답을 찾았습니다.</p>
+    </div>
+
+    <div class="card">
+      <h3>사람에 대한 애정 — 친해졌다고 느낄 때</h3>
+      <p>가까워졌다 싶은 사람 앞에서 확실히 켜집니다.</p>
+      <p class="scene">다녔던 회사마다 동료들의 취미나 성향을 파악하려고 애썼습니다. 그렇게 알게 된 각자의 특징을 살려 퇴근 후에도 함께 취미를 즐겼고, 퇴사한 뒤로도 지금까지 연락을 이어가고 있습니다.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>저와 일하실 분께</h2>
+    <div class="two">
+      <div class="card">
+        <h3>켜질 때</h3>
+        <ul>
+          <li>한 가지 목표에 깊게 몰입할 때 에너지가 올라옵니다.</li>
+          <li>처음 접하는 내용을 파고들 때 속도가 붙습니다.</li>
+          <li>가까운 사람들과 함께 움직일 때 힘이 납니다.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>꺼질 때</h3>
+        <ul>
+          <li>같은 일을 오래 반복하며 변화가 없을 때 금방 지칩니다.</li>
+          <li>이미 충분히 아는 내용을 다시 배워야 할 때 지루합니다.</li>
+          <li>체력을 많이 쓴 뒤에는 회복할 시간이 필요합니다.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px">
+      <h3>막히면 이렇게 합니다</h3>
+      <p>자리에서 일어나 따뜻한 햇볕을 잠깐 쬐고 옵니다. 그래도 안 풀리면 아무 생각 없이 쇼츠를 보며 과열된 머리를 식힙니다. 그러고 나서 다시 앉으면 대체로 다시 뚫립니다.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>같이 배우는 사람들이 본 저</h2>
+    <blockquote>
+      <p>“수업 태도만 봐도 학구열이 높아 보였고, 도전정신까지 있으니 충분히 좋은 결과물을 가져갈 수 있을 거라고 생각해요. 팀원을 잘 챙기는 점도 큰 강점이에요.”</p>
+      <cite>— 같은 과정 유미 님</cite>
+    </blockquote>
+    <blockquote>
+      <p>“‘강혜성’이라는 브랜드가 있다면, 언제든 돈쭐 내러 갈 준비가 되어 있습니다.”</p>
+      <cite>— 같은 과정 원웅 님</cite>
+    </blockquote>
+    <blockquote>
+      <p>“처음 봤을 때 허둥지둥하던 모습과 다르게, 거의 백지 상태에서 뭐든 열심히 하려는 걸 보며 나도 많이 자극받았어. 안전한 직장에서 나와 도전하는 모습이 정말 대단해.”</p>
+      <cite>— 같은 조 경민 형</cite>
+    </blockquote>
+  </section>
+
+  <footer>
+    <p>이 페이지는 저를 처음 만나는 분께 제가 어떤 사람이고 지금 무엇을 하는 중인지 보여주기 위한 개인 소개 페이지입니다.</p>
+    <p>연락처와 개인정보는 일부러 올리지 않았습니다. 필요하신 분은 이미 제 연락처를 알고 계실 겁니다.</p>
+    <p>2026년 9월 · 강혜성</p>
+  </footer>
+
+</div>
+</body>
+</html>
