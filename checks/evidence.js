@@ -243,7 +243,11 @@
     check('C42·C43', '한 계정에 패스키 2개, 목록에 이름과 등록 날짜', av.status === 200 && list2.data.credentials.length === 2 &&
       list2.data.credentials.every(function (c) { return c.name && c.createdAt; }) && excl.indexOf(A.id) >= 0,
       list2.data.credentials.map(function (c) { return c.name + ' (' + c.createdAt + ')'; }).join(' / '));
+    var pre = await login(A, 'A 첫 패스키로 로그인해 세션 하나 열어 두기 (잃어버린 기기라고 가정)');
+    var lostTok = pre.verify.data.session.token;
     var del = await call('DELETE', '/credentials/' + encodeURIComponent(A.id), { token: tokA, label: 'A: 첫 패스키 지우기' });
+    var lostAfter = await call('GET', '/vault', { token: lostTok, label: '지운 패스키로 열려 있던 세션으로 /vault' });
+    check('C45 (덧붙임)', '패스키를 지우면 그 패스키로 열려 있던 세션도 끊김', del.data.revokedSessions >= 1 && lostAfter.status === 401 && lostAfter.data.error === 'session_revoked', '끊은 세션 ' + del.data.revokedSessions + '개, 이후 요청 ' + lostAfter.status + ' ' + lostAfter.data.error);
     var l2 = await login(A2, 'A 남은 패스키(두 번째)로 로그인');
     var l1 = await login(A, 'A 지운 패스키(첫 번째)로 로그인');
     check('C44', '하나를 지운 뒤 남은 패스키로 들어감', del.status === 200 && l2.verify.status === 200, '지우기 ' + del.status + ', 남은 것 로그인 ' + l2.verify.status);
