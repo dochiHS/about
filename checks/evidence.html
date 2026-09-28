@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>T08 확인 기록기</title>
+<style>
+:root{--bg:#0c0a09;--ink:#f2ece4;--ink2:#b9ada0;--ink3:#7d7268;--line:rgba(224,160,106,.2);--amber:#e5a86a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.7 -apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;word-break:keep-all}
+main{max-width:980px;margin:0 auto;padding:40px 16px 80px}
+h1{font-size:24px;margin:0 0 6px}
+p{color:var(--ink2);margin:0 0 12px}
+.bar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:18px 0 24px}
+button{font:inherit;font-weight:600;padding:9px 16px;border-radius:10px;border:1px solid var(--amber);background:rgba(229,168,106,.12);color:var(--ink);cursor:pointer}
+button:disabled{opacity:.4}
+#ev-sum{color:var(--amber);font-weight:600}
+h2{font-size:17px;margin:30px 0 10px;padding-top:14px;border-top:1px solid var(--line)}
+blockquote{margin:10px 0;padding:10px 14px;border-left:3px solid var(--amber);background:rgba(255,247,238,.03);white-space:pre-wrap;color:var(--ink2);font-size:13.5px;word-break:break-all}
+.rq{margin:8px 0}.rq .lb{font-size:13px;color:var(--ink3)}
+pre{margin:4px 0 0;padding:10px 12px;background:#000;border-radius:8px;font-size:12px;line-height:1.55;white-space:pre-wrap;word-break:break-all;color:#d8d0c6}
+.s2{color:#8fd08a}.s4{color:#f0a89c}.s5{color:#ff6b6b}
+.ck{margin:10px 0;padding:8px 12px;border-radius:8px;border:1px solid}
+.ck small{display:block;color:var(--ink3);white-space:pre-wrap;word-break:break-all}
+.ck.ok{border-color:rgba(127,174,124,.5);background:rgba(127,174,124,.08)}
+.ck.bad{border-color:rgba(214,98,86,.6);background:rgba(214,98,86,.1)}
+a{color:var(--amber)}
+</style>
+</head>
+<body>
+<main>
+  <h1>T08 확인 기록기 — 패스키 잠금</h1>
+  <p>실제 서버에 실제 요청을 보내 확인 네 가지(로그인 없이 열기 · 남의 패스키로 열기 · 이미 쓴 질문 재사용 · 패스키 삭제 뒤 로그인)와 등록·교차 계정 검사를 한 번에 돌리고, 요청과 응답을 나란히 남깁니다.</p>
+  <p>검사용 계정 두 개를 <b>시험용 소프트웨어 패스키</b>로 새로 만듭니다(내용은 모두 만들어 넣은 것). 본인의 실제 패스키와 계정은 건드리지 않습니다. 새 계정 만들기가 닫혀 있으면 실행되지 않습니다. 심사하시는 분은 실행하지 않으셔도 됩니다.</p>
+  <p><a href="../">← 소개 페이지로</a></p>
+  <div class="bar">
+    <button id="run" type="button">검사 실행</button>
+    <button id="dl" type="button" disabled>기록 Markdown 받기</button>
+    <span id="ev-sum"></span>
+  </div>
+  <div id="ev-out"></div>
+</main>
+<script src="../vault/config.js"></script>
+<script src="softkey.js"></script>
+<script src="evidence.js"></script>
+<script>
+document.getElementById('run').onclick = async function () {
+  this.disabled = true; document.getElementById('ev-sum').textContent = '실행 중…';
+  try { await window.runEvidence(); document.getElementById('dl').disabled = false; }
+  catch (e) { document.getElementById('ev-sum').textContent = '중단: ' + e.message; }
+  this.disabled = false;
+};
+document.getElementById('dl').onclick = function () {
+  var md = window.__evidence.markdown;
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([md], { type: 'text/markdown;charset=utf-8' }));
+  a.download = 'T08_확인기록_' + new Date().toISOString().slice(0, 16).replace(/[-:T]/g, '') + '.md';
+  a.click();
+};
+</script>
+</body>
+</html>
