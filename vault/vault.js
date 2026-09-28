@@ -244,12 +244,12 @@
       var nm = prompt('새 이름', c.name); if (nm == null) return;
       api('/credentials/' + encodeURIComponent(id), { method: 'PATCH', body: { name: nm } }).then(loadVault).then(function () { msg('이름을 바꿨습니다.', 'ok'); }, function (e) { msg(e.message, 'err'); });
     } else if (b.dataset.act === 'delkey') {
-      var warnSelf = id === state.myCredId ? '\n(지금 이 패스키로 들어와 있습니다. 지워도 이번 세션은 로그아웃할 때까지 유지됩니다.)' : '';
+      var warnSelf = id === state.myCredId ? '\n(지금 이 패스키로 들어와 있어서, 지우면 바로 로그아웃됩니다.)' : '';
       if (!confirm('"' + c.name + '" 패스키를 지울까요? 지운 패스키로는 다시 들어올 수 없습니다.' + warnSelf)) return;
       api('/credentials/' + encodeURIComponent(id), { method: 'DELETE' }).then(function (r) {
-        return loadVault().then(function () {
-          msg('"' + c.name + '"을(를) 지웠습니다. 남은 패스키 ' + r.remaining + '개. 기기 쪽(비밀번호 관리자 등)에 남은 패스키 항목은 직접 지워 주세요.', 'ok');
-        });
+        var text = '"' + c.name + '"을(를) 지웠습니다. 남은 패스키 ' + r.remaining + '개. 그 패스키로 열려 있던 세션 ' + r.revokedSessions + '개도 끊었습니다. 기기 쪽(비밀번호 관리자 등)에 남은 패스키 항목은 직접 지워 주세요.';
+        if (id === state.myCredId) { setToken('', null); state.vault = null; showLocked(); msg(text + ' 지금 쓰던 패스키라 로그아웃되었습니다.', 'ok'); return; }
+        return loadVault().then(function () { msg(text, 'ok'); });
       }, function (e) { msg(e.message, e.status === 409 ? 'warn' : 'err'); });
     }
   });
