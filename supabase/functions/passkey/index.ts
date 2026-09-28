@@ -255,7 +255,15 @@ async function route(req: Request, path: string): Promise<Response | Row> {
   const body = await readJson(req);
 
   if (m === "GET" && path === "/health") {
-    return { ok: true, rpID: RP_ID, origins: EXPECTED_ORIGINS, registrationOpen: (await store.getSetting("registration_open")) === true };
+    // 서버 상태 확인용. 키 값은 절대 내보내지 않고, 어떤 이름의 환경변수가 있는지만 알려 줍니다.
+    try {
+      return { ok: true, rpID: RP_ID, origins: EXPECTED_ORIGINS, registrationOpen: (await store.getSetting("registration_open")) === true };
+    } catch (e) {
+      return new Response(JSON.stringify({
+        ok: false, db: "error", reason: String((e as Error).message).slice(0, 200),
+        keyEnv: ["SUPABASE_SERVICE_ROLE_KEY", "SUPABASE_SECRET_KEYS"].filter((k) => !!Deno.env.get(k)),
+      }), { status: 503 });
+    }
   }
 
   // ── 등록 ①: 질문 만들기 ──────────────────────────────
