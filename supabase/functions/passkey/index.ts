@@ -51,6 +51,7 @@ interface Store {
   insertSession(s: Row): Promise<void>;
   getSession(hash: string): Promise<Row | null>;
   revokeSession(hash: string): Promise<void>;
+  revokeSessionsByCred(credId: string): Promise<number>;
   listNotes(userId: string): Promise<Row[]>;
   getNote(id: string): Promise<Row | null>;
   insertNote(n: Row): Promise<Row>;
@@ -115,6 +116,10 @@ function supabaseStore(): Store {
     insertSession: (s) => one(db.from("pk_sessions").insert(s)),
     getSession: (h) => one(db.from("pk_sessions").select("*").eq("token_hash", h).maybeSingle()),
     revokeSession: (h) => one(db.from("pk_sessions").update({ revoked_at: nowIso() }).eq("token_hash", h).is("revoked_at", null)),
+    async revokeSessionsByCred(cid) {
+      const d = await one(db.from("pk_sessions").update({ revoked_at: nowIso() }).eq("credential_id", cid).is("revoked_at", null).select("token_hash"));
+      return d?.length ?? 0;
+    },
     listNotes: (uid) => one(db.from("pk_notes").select("*").eq("user_id", uid).order("created_at")),
     getNote: (id) => one(db.from("pk_notes").select("*").eq("id", id).maybeSingle()),
     insertNote: async (n) => (await one(db.from("pk_notes").insert(n).select().single())),
@@ -162,6 +167,7 @@ function memoryStore(): Store {
     insertSession: async (s) => { t.sess.set(s.token_hash, { created_at: nowIso(), revoked_at: null, ...s }); },
     getSession: async (h) => t.sess.get(h) ?? null,
     revokeSession: async (h) => { const s = t.sess.get(h); if (s && !s.revoked_at) s.revoked_at = nowIso(); },
+    revokeSessionsByCred: async (cid) => { let n = 0; t.sess.forEach((s) => { if (s.credential_id === cid && !s.revoked_at) { s.revoked_at = nowIso(); n++; } }); return n; },
     listNotes: async (uid) => [...t.notes.values()].filter((n) => n.user_id === uid).sort(byCreated),
     getNote: async (id) => t.notes.get(id) ?? null,
     insertNote: async (n) => { const r = { id: crypto.randomUUID(), created_at: nowIso(), updated_at: nowIso(), kind: "memo", body: "", ...n }; t.notes.set(r.id, r); return r; },
@@ -468,7 +474,9 @@ async function route(req: Request, path: string): Promise<Response | Row> {
         fail(409, "last_passkey", "마지막 남은 패스키는 지울 수 없습니다. 이것까지 지우면 비밀번호가 없는 이 계정에는 아무도 다시 들어올 수 없습니다. 새 패스키를 먼저 추가하세요.");
       }
       await store.deleteCred(c!.id, user.id);
-      return { deleted: true, id: c!.id, remaining: all.length - 1 };
+      // 잃어버린 기기의 패스키를 지웠다면, 그 패스키로 이미 열려 있던 세션도 함께 끊습니다.
+      const revokedSessions = await store.revokeSessionsByCred(c!.id);
+      return { deleted: true, id: c!.id, remaining: all.length - 1, revokedSessions };
     }
   }
 
