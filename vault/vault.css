@@ -1,0 +1,94 @@
+/* ALEPH T08 · 06 나만 보는 자리 — 공개 소개(01~05)와 한눈에 갈리도록 */
+.boundary{
+  position:relative;z-index:2;margin:0;padding:34px 0 0;border-top:1px dashed rgba(229,168,106,.45);
+  display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  font-size:12.5px;letter-spacing:.16em;color:var(--ink-3);
+}
+.boundary .pub,.boundary .priv{display:inline-flex;align-items:center;gap:8px}
+.boundary .pub::before{content:"";width:8px;height:8px;border-radius:50%;background:#6b8a6a}
+.boundary .priv{color:var(--amber)}
+.boundary .priv svg{width:14px;height:14px}
+
+section.vault{
+  border-top:none;margin:22px 0 40px;padding:44px 34px 40px;border-radius:26px;
+  border:1px solid rgba(229,168,106,.28);
+  background:
+    repeating-linear-gradient(135deg,rgba(229,168,106,.025) 0 14px,transparent 14px 28px),
+    rgba(20,15,12,.72);
+  box-shadow:inset 0 0 0 1px rgba(0,0,0,.4),0 30px 80px -40px rgba(209,113,74,.35);
+}
+@media(max-width:720px){section.vault{padding:32px 18px 28px;border-radius:20px}}
+.vault .tag .no{color:var(--amber)}
+.vault .state{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;letter-spacing:.12em;
+  padding:5px 12px;border-radius:999px;border:1px solid var(--line);color:var(--ink-2)}
+.vault .state::before{content:"";width:7px;height:7px;border-radius:50%;background:#8a6b5d}
+.vault .state.open::before{background:#7fae7c}
+.vault .state.open{color:#cfe3cd;border-color:rgba(127,174,124,.35)}
+
+.vault .intro{color:var(--ink-2);margin:0 0 26px;max-width:640px}
+.vault .intro strong{color:var(--ink)}
+.v-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:820px){.v-grid{grid-template-columns:1fr}}
+.v-card{border:1px solid var(--line);border-radius:18px;padding:24px 24px 22px;background:rgba(255,247,238,.03)}
+.v-card h3{font-family:var(--serif);font-size:20px;margin:0 0 6px;letter-spacing:-.02em}
+.v-card p{margin:0 0 14px;color:var(--ink-2);font-size:15.5px;line-height:1.7}
+.v-card .fine{font-size:13.5px;color:var(--ink-3)}
+.v-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.v-input{
+  flex:1 1 200px;min-width:0;background:rgba(0,0,0,.35);border:1px solid rgba(255,247,238,.14);border-radius:12px;
+  color:var(--ink);font:inherit;font-size:15.5px;padding:11px 14px;outline:none;
+}
+.v-input:focus{border-color:var(--amber);box-shadow:0 0 0 3px rgba(229,168,106,.16)}
+textarea.v-input{width:100%;min-height:96px;resize:vertical;line-height:1.65}
+.v-btn{
+  appearance:none;border:1px solid rgba(229,168,106,.5);background:rgba(229,168,106,.1);color:var(--ink);
+  font:inherit;font-size:15px;font-weight:600;padding:10px 18px;border-radius:12px;cursor:pointer;
+  display:inline-flex;align-items:center;gap:8px;transition:background .2s,border-color .2s,transform .2s;
+}
+.v-btn:hover{background:rgba(229,168,106,.2)}
+.v-btn:active{transform:translateY(1px)}
+.v-btn:disabled{opacity:.45;cursor:not-allowed}
+.v-btn.primary{background:var(--copper);border-color:var(--copper);color:#1a100b}
+.v-btn.primary:hover{background:#dd7f58}
+.v-btn.ghost{background:transparent;border-color:rgba(255,247,238,.16);color:var(--ink-2);font-weight:500}
+.v-btn.danger{background:transparent;border-color:rgba(214,98,86,.45);color:#f0b1a8;font-weight:500}
+.v-btn.sm{font-size:13.5px;padding:6px 12px;border-radius:10px}
+.v-btn svg{width:17px;height:17px}
+
+.v-msg{margin:18px 0 0;padding:12px 16px;border-radius:12px;font-size:14.5px;line-height:1.65;display:none;
+  border:1px solid rgba(255,247,238,.12);background:rgba(255,247,238,.04);color:var(--ink-2)}
+.v-msg.show{display:block}
+.v-msg.ok{border-color:rgba(127,174,124,.4);color:#d3e6d1;background:rgba(127,174,124,.07)}
+.v-msg.warn{border-color:rgba(229,168,106,.45);color:#f3d7b6;background:rgba(229,168,106,.07)}
+.v-msg.err{border-color:rgba(214,98,86,.5);color:#f4c2bb;background:rgba(214,98,86,.08)}
+.v-msg code{font-size:12.5px;color:var(--ink-3)}
+
+.v-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:0 0 22px}
+.v-head .who{font-family:var(--serif);font-size:22px;letter-spacing:-.02em}
+.v-head .who small{display:block;font-family:var(--sans);font-size:13px;color:var(--ink-3);letter-spacing:.04em}
+.v-sub{font-size:13px;letter-spacing:.2em;color:var(--ink-3);margin:30px 0 14px;display:flex;align-items:center;gap:12px}
+.v-sub::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent)}
+
+.notes{display:grid;gap:14px}
+.note{border:1px solid var(--line);border-radius:16px;padding:18px 20px;background:rgba(255,247,238,.03)}
+.note .k{font-size:12px;letter-spacing:.14em;color:var(--amber)}
+.note h4{font-family:var(--serif);font-size:18px;margin:2px 0 6px;letter-spacing:-.02em}
+.note .b{white-space:pre-wrap;color:var(--ink-2);font-size:15.5px;line-height:1.75;margin:0}
+.note .acts{display:flex;gap:8px;margin-top:12px}
+.note.edit .b,.note.edit h4{display:none}
+.v-empty{color:var(--ink-3);font-size:15px;padding:18px;border:1px dashed rgba(255,247,238,.12);border-radius:14px}
+
+.keys{display:grid;gap:12px}
+.key{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:start;border:1px solid var(--line);border-radius:16px;padding:16px 18px;background:rgba(255,247,238,.03)}
+@media(max-width:620px){.key{grid-template-columns:1fr}.key .ic{display:none}}
+.key .ic{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:rgba(229,168,106,.1);color:var(--amber)}
+.key .ic svg{width:20px;height:20px}
+.key .nm{font-weight:700;font-size:16px}
+.key .nm .me{font-size:11.5px;font-weight:600;letter-spacing:.08em;color:#cfe3cd;border:1px solid rgba(127,174,124,.4);border-radius:999px;padding:1px 8px;margin-left:8px;vertical-align:2px}
+.key .meta{font-size:13.5px;color:var(--ink-3);line-height:1.7;margin-top:2px}
+.key .pk{margin-top:8px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;color:var(--ink-3);word-break:break-all;
+  background:rgba(0,0,0,.3);border-radius:8px;padding:6px 10px}
+.key .acts{display:flex;gap:8px;flex-wrap:wrap}
+.v-foot{margin-top:26px;font-size:13.5px;color:var(--ink-3);line-height:1.75}
+.v-foot b{color:var(--ink-2);font-weight:600}
+[hidden]{display:none!important}
