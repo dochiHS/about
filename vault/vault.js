@@ -84,6 +84,7 @@
     if (n === 'InvalidStateError') return '이 기기에는 이미 이 계정의 패스키가 있습니다. 다른 기기나 다른 저장소(휴대폰 QR 등)를 골라 주세요.';
     if (n === 'SecurityError') return '이 주소에서는 패스키를 쓸 수 없습니다(https 주소인지 확인).';
     if (n === 'NotSupportedError') return '이 브라우저나 기기가 패스키를 지원하지 않습니다.';
+    if (INAPP || /credential manager/i.test((e && e.message) || '')) return '앱 안의 브라우저(카카오톡 등)에서는 패스키를 쓸 수 없습니다. 크롬·삼성 인터넷·사파리로 열어 주세요.';
     return (e && e.message) || String(e);
   }
 
@@ -253,6 +254,19 @@
       }, function (e) { msg(e.message, e.status === 409 ? 'warn' : 'err'); });
     }
   });
+
+  // ── 카카오톡·네이버 등 앱 안 브라우저는 패스키 관리자와 연결되지 않습니다 ──
+  var INAPP = /KAKAOTALK|NAVER\(inapp|Instagram|FBAN|FBAV|Line\/|DaumApps|everytimeApp|; wv\)/i.test(navigator.userAgent);
+  function inAppHint() {
+    var url = location.href.split('#')[0];
+    var m = $('v-msg');
+    m.className = 'v-msg show warn';
+    m.innerHTML = '지금은 <b>앱 안의 브라우저</b>(카카오톡 등)로 열려 있어서 패스키를 쓸 수 없습니다. <b>크롬·삼성 인터넷·사파리</b>로 열어 주세요.<br>' +
+      '<a style="color:inherit;font-weight:700" href="' + (/KAKAOTALK/i.test(navigator.userAgent)
+        ? 'kakaotalk://web/openExternal?url=' + encodeURIComponent(url)
+        : 'intent://' + url.replace(/^https?:\/\//, '') + '#Intent;scheme=https;package=com.android.chrome;end') + '">→ 다른 브라우저로 열기</a>';
+  }
+  if (INAPP) inAppHint();
 
   // ── 새 계정 만들기가 열려 있는지 ──
   api('/health', { noSession: true }).then(function (h) {
