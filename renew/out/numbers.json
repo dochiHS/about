@@ -1,0 +1,53 @@
+{
+  "attendance": {
+    "absent": 0,
+    "days": 35,
+    "earliest_in": "08:18",
+    "first": "2026-08-11",
+    "in_by_0900": 30,
+    "last": "2026-10-01",
+    "late": 0,
+    "present": 35,
+    "rate": 100.0,
+    "source": "ALEPH 내 출석 기록 (input/attendance.csv)"
+  },
+  "ritual": {
+    "both_days": 35,
+    "bounce_back": [
+      {
+        "fell": "2026-08-31",
+        "next": "2026-09-01",
+        "next_flag": "실천했다"
+      },
+      {
+        "fell": "2026-10-01",
+        "next": null,
+        "next_flag": null
+      }
+    ],
+    "close_days": 35,
+    "first": "2026-08-11",
+    "last": "2026-10-02",
+    "missed_dates": [
+      "2026-08-31",
+      "2026-10-01"
+    ],
+    "open_days": 36,
+    "recovered_next_day": 1,
+    "source": "ALEPH 리추얼 기록 (ritual-history-2026-10-02.json)",
+    "strength_did": 30,
+    "strength_missed": 2,
+    "strength_partly": 3
+  },
+  "tasks": {
+    "approved": 11,
+    "first": "2026-09-10",
+    "last": "2026-10-01",
+    "resubmitted": [
+      "T01"
+    ],
+    "source": "ALEPH 내 제출 현황 (input/tasks.csv)",
+    "submissions": 13,
+    "tasks": 11
+  }
+}
