@@ -1,8 +1,0 @@
-# 사이트에 올릴 문단 후보 id (out/candidates.md 에서 골라 한 줄에 하나)
-# 여기 적힌 것만 data/site.json 에 들어갑니다.
-self_control-2026-08-25-1
-self_control-2026-09-04-3
-relationship-2026-09-14-2
-relationship-2026-10-01-3
-self_motivation-2026-08-12-1
-self_motivation-2026-09-01-3
